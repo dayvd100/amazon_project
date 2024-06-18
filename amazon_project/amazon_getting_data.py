@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from interface_data_products import search_product
 
 browser = webdriver.Chrome()
 
@@ -31,6 +32,7 @@ try:
         print(f'Produto: {name.text}')
         print(f'R$ {price.text}')
         print()
+
 
     breakpoint()
 
