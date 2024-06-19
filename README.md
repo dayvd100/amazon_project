@@ -51,4 +51,4 @@ Certifique-se de ter o driver do navegador Chrome instalado e acessível no PATH
 ## 3 Execução do show_graphic.py:
 
 - Após executar selenium_script.py e gerar o arquivo CSV, execute o script Python show_graphic.py.
-- Este script lerá os dados salvos no amazon_products.csv, calculará as médias de avaliações das marcas AOC, Samsung e LG e gerará um gráfico de barras mostrando essas médias.
+- Este script lerá os dados salvos no amazon_products.csv, calculará as médias de avaliações das marcas AOC, Samsung e LG (opcional) e gerará um gráfico de barras mostrando essas médias.
