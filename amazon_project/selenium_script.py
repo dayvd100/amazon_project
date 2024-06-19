@@ -2,9 +2,11 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import csv
 
 def search_amazon_product(produto):
     browser = webdriver.Chrome()
+    results = []
 
     try:
         browser.get('https://www.amazon.com.br/')
@@ -25,16 +27,25 @@ def search_amazon_product(produto):
 
         price_products = browser.find_elements(By.XPATH, '//span[@class="a-price-whole"]')
         products_name = browser.find_elements(By.XPATH, '//h2[@class="a-size-mini a-spacing-none a-color-base s-line-clamp-4"]/a/span')
+        avaliations_products = browser.find_elements(By.XPATH, '//span[contains(@class, "a-icon-alt")]')
 
-        results = []
-        for price, name in zip(price_products, products_name):
-            results.append(f'Produto: {name.text}\n')
-            results.append(f'R$ {price.text}\n\n')
-
-        return results
+        for price, name, avaliation in zip(price_products, products_name, avaliations_products):
+            results.append((name.text, price.text, avaliation.get_attribute("textContent")[0:3]))
 
     except Exception as e:
-        return [f"Ocorreu um erro: {str(e)}"]
+        results = [(f"Ocorreu um erro: {str(e)}", "", "")]
 
     finally:
         browser.quit()
+        print(results)
+
+    return results
+
+def save_to_csv(results, filename):
+    with open(filename, mode='w', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file)
+        writer.writerow(["Product Name", "Price", "Rating"])
+        writer.writerows(results)
+
+results = search_amazon_product("Monitor")
+save_to_csv(results, "amazon_products.csv")
