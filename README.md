@@ -44,7 +44,9 @@ Certifique-se de ter o driver do navegador Chrome instalado e acessível no PATH
 
 ## 2 Execução do selenium_script.py:
 
-- Execute o script Python selenium_script.py para iniciar o scraping de dados da Amazon.
+- Execute o script com:
+- ```Python selenium_script.py```
+-  para iniciar o scraping de dados da Amazon.
 - Este script solicitará um termo de pesquisa (exemplo: "Monitor") para iniciar a busca no site da Amazon.
 - Os resultados serão salvos em um arquivo amazon_products.csv.
 
