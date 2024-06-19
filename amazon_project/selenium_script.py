@@ -30,10 +30,10 @@ def search_amazon_product(produto):
         avaliations_products = browser.find_elements(By.XPATH, '//span[contains(@class, "a-icon-alt")]')
 
         for price, name, avaliation in zip(price_products, products_name, avaliations_products):
-            results.append((name.text, price.text, avaliation.get_attribute("textContent")[0:3]))
+            results.append(f'{name.text};{price.text};{avaliation.get_attribute("textContent")[0:3]}')
 
     except Exception as e:
-        results = [(f"Ocorreu um erro: {str(e)}", "", "")]
+        results = [f"Ocorreu um erro: {str(e)}"]
 
     finally:
         browser.quit()
@@ -43,9 +43,10 @@ def search_amazon_product(produto):
 
 def save_to_csv(results, filename):
     with open(filename, mode='w', newline='', encoding='utf-8') as file:
-        writer = csv.writer(file)
+        writer = csv.writer(file, delimiter=';')
         writer.writerow(["Product Name", "Price", "Rating"])
-        writer.writerows(results)
+        for result in results:
+            writer.writerow(result.split(';')) 
 
 results = search_amazon_product("Monitor")
 save_to_csv(results, "amazon_products.csv")

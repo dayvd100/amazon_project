@@ -3,7 +3,10 @@ import matplotlib.pyplot as plt
 
 def read_and_filter_csv(filename):
     try:
-        df = pd.read_csv(filename, encoding='utf-8')
+        df = pd.read_csv(filename, encoding='utf-8', delimiter=';')
+
+        df['Rating'] = pd.to_numeric(df['Rating'].str.replace(',', '.'), errors='coerce')
+        
         brands = ["AOC", "Samsung", "LG"]
         pattern = '|'.join(brands)
         filtered_df = df[df['Product Name'].str.contains(pattern, case=False, na=False)]
@@ -17,8 +20,6 @@ def read_and_filter_csv(filename):
 
 def calculate_and_plot_mean_ratings(df):
     try:
-        df['Rating'] = pd.to_numeric(df['Rating'].str.replace(',', '.'), errors='coerce')
-
         df = df.dropna(subset=['Rating'])
 
         df['Brand'] = df['Product Name'].apply(lambda x: 'Samsung' if 'Samsung' in x else 'LG' if 'LG' in x else 'AOC')
