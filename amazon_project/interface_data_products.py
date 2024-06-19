@@ -1,6 +1,6 @@
 from tkinter import *
 
-def search_product():
+def search_product(entry, status_label):
     produto = entry.get()
     if produto:
         status_label.config(text=f"Produto pesquisado: {produto}")
@@ -9,19 +9,28 @@ def search_product():
         status_label.config(text="Nenhum produto inserido")
         return None
 
-root = Tk()
-root.title("Busca por produtos na Amazon")
-root.geometry("400x700")
+def main():
+    root = Tk()
+    root.title("Busca por produtos na Amazon")
+    root.geometry("400x700")
 
-Label(root, text="Pesquisar por produtos na Amazon", font=("Helvetica", 14)).pack(pady=10)
+    Label(root, text="Pesquisar por produtos na Amazon", font=("Helvetica", 18)).pack(pady=10)
 
-entry = Entry(root, width=30)
-entry.pack(pady=30)
+    entry = Entry(root, width=30)
+    entry.pack(pady=30)
 
-btn_search = Button(root, text="Pesquisar", command=search_product)
-btn_search.pack()
+    status_label = Label(root, text="", font=("Helvetica", 12))
+    status_label.pack(pady=20)
 
-status_label = Label(root, text="", font=("Helvetica", 12))
-status_label.pack(pady=20)
+    def on_search():
+        produto_pesquisado = search_product(entry, status_label)
+        if produto_pesquisado:
+            print(produto_pesquisado)
 
-root.mainloop()
+    btn_search = Button(root, text="Pesquisar", command=on_search)
+    btn_search.pack()
+
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()

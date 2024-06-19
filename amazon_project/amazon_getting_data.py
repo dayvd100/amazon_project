@@ -1,8 +1,9 @@
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from interface_data_products import search_product
+# from interface_data_products import main
 
 browser = webdriver.Chrome()
 
@@ -15,9 +16,9 @@ try:
 
     btn_search = browser.find_element(By.XPATH, '//input[@id="nav-search-submit-button"]')
 
-    product_search_by_client = input("Insira o nome do produto: ")
+    product_searched = input("insira o nome do produto: ")
 
-    search_box.send_keys(product_search_by_client)
+    search_box.send_keys(product_searched)
 
     btn_search.click()
 
