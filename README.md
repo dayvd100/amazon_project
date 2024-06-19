@@ -45,12 +45,17 @@ Certifique-se de ter o driver do navegador Chrome instalado e acessível no PATH
 ## 2 Execução do selenium_script.py:
 
 - Execute o script com:
-- ```Python selenium_script.py```
+  ```
+  Python selenium_script.py
+  ```
 -  para iniciar o scraping de dados da Amazon.
 - Este script solicitará um termo de pesquisa (exemplo: "Monitor") para iniciar a busca no site da Amazon.
-- Os resultados serão salvos em um arquivo amazon_products.csv.
+- Os resultados serão salvos em um arquivo ```amazon_products.csv.```
 
 ## 3 Execução do show_graphic.py:
 
-- Após executar selenium_script.py e gerar o arquivo CSV, execute o script Python show_graphic.py.
+- Após executar selenium_script.py e gerar o arquivo CSV, execute o script:
+  ```
+  Python show_graphic.py.
+  ```
 - Este script lerá os dados salvos no amazon_products.csv, calculará as médias de avaliações das marcas AOC, Samsung e LG (opcional) e gerará um gráfico de barras mostrando essas médias.
